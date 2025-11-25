@@ -466,7 +466,9 @@
         return;
       }
 
-      const encabezados = lineas[0].split(';').map(h => h.trim());
+      const encabezados = lineas[0]
+  .split(';')
+  .map(h => h.replace('\uFEFF', '').trim());
 
       const idxAnio       = encabezados.indexOf('Año');
       const idxMes        = encabezados.indexOf('Mes');
