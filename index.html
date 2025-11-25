@@ -173,7 +173,6 @@
       color: var(--accent-soft);
     }
 
-    input[type="file"],
     input[type="text"],
     select,
     button {
@@ -197,11 +196,6 @@
     select:focus {
       border-color: #6b7280;
       box-shadow: 0 0 0 1px #6b7280;
-    }
-
-    input[type="file"] {
-      background: #020617;
-      width: 100%;
     }
 
     button {
@@ -355,20 +349,19 @@
 
     <h1>Resumen de compras por cliente</h1>
     <div class="subtitulo">
-      Subí el archivo CSV de ventas y buscá por nombre de cliente para ver qué productos compra,
-      con Marca, Rubro, Unidades y Volumen $.
-      <span class="badge">Fuente: Leandro clientes.csv</span>
+      Los datos se cargan automáticamente desde la base <b>"Leandro clientes.csv"</b> publicada en el servidor.
+      Luego buscás por nombre de cliente y analizás productos, marcas, rubros, unidades y volumen $.
+      <span class="badge">Datos: Leandro clientes.csv</span>
     </div>
 
     <div class="layout">
       <!-- PANEL IZQUIERDO: CONTROLES -->
       <div>
         <div class="card card-soft">
-          <label for="fileInput">1 · Cargar archivo CSV</label><br />
-          <input type="file" id="fileInput" accept=".csv" />
+          <label>1 · Fuente de datos</label><br />
           <div class="info">
-            El CSV debe estar separado por <b>;</b> y contener:<br/>
-            <code>Año; Mes; Cod. Artículo; Artículo; Marca; Rubro; Cliente; Unidades; Volumen $</code>
+            La información se lee automáticamente del archivo
+            <b>Leandro clientes.csv</b> ubicado en este mismo servidor.
           </div>
         </div>
 
@@ -445,7 +438,6 @@
     let mesesUnicos = [];
     let clienteActual = null;
 
-    const fileInput = document.getElementById('fileInput');
     const clienteInput = document.getElementById('clienteInput');
     const listaClientes = document.getElementById('listaClientes');
     const btnBuscar = document.getElementById('btnBuscar');
@@ -466,18 +458,6 @@
       "5": "Mayo", "6": "Junio", "7": "Julio", "8": "Agosto",
       "9": "Septiembre", "10": "Octubre", "11": "Noviembre", "12": "Diciembre"
     };
-
-    fileInput.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        const text = evt.target.result;
-        procesarCSV(text);
-      };
-      reader.readAsText(file, 'ISO-8859-1');
-    });
 
     function procesarCSV(texto) {
       const lineas = texto.trim().split(/\r?\n/);
@@ -585,8 +565,6 @@
 
       filtroAnio.value = 'todos';
       filtroMes.value = 'todos';
-
-      alert('Archivo cargado correctamente. Ya podés buscar un cliente.');
     }
 
     btnBuscar.addEventListener('click', buscarCliente);
@@ -605,6 +583,7 @@
       if (!texto) {
         mensajeBusqueda.textContent = 'Ingresá al menos parte del nombre del cliente.';
         mensajeBusqueda.style.display = 'block';
+        detalleClienteCard.style.display = 'none';
         return;
       }
 
@@ -743,6 +722,22 @@
         maximumFractionDigits: 2
       });
     }
+
+    // === CARGA AUTOMÁTICA DEL CSV DESDE GITHUB PAGES ===
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('Leandro clientes.csv')
+        .then(resp => {
+          if (!resp.ok) throw new Error('No se pudo cargar el CSV del servidor.');
+          return resp.text();
+        })
+        .then(textoCSV => {
+          procesarCSV(textoCSV);
+        })
+        .catch(err => {
+          console.error(err);
+          alert('No se pudo cargar el archivo "Leandro clientes.csv" desde el servidor. Verificá que el archivo esté en la raíz del repositorio y que el nombre coincida EXACTO.');
+        });
+    });
   </script>
 </body>
 </html>
