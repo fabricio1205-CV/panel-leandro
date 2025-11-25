@@ -329,7 +329,6 @@
     <header>
       <div class="cv-brand">
         <div class="cv-logo">
-          <!-- Cambiá el nombre del archivo si necesitás -->
           <img src="casavictor-logo.png" alt="Casa Victor" />
         </div>
         <div class="cv-text-main">
@@ -466,9 +465,10 @@
         return;
       }
 
+      // FIX BOM + trim de encabezados
       const encabezados = lineas[0]
-  .split(';')
-  .map(h => h.replace('\uFEFF', '').trim());
+        .split(';')
+        .map(h => h.replace('\uFEFF', '').trim());
 
       const idxAnio       = encabezados.indexOf('Año');
       const idxMes        = encabezados.indexOf('Mes');
