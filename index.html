@@ -5,293 +5,744 @@
   <title>Casa Victor · Panel de Clientes Leandro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --bg-main: #0f1115;
+      --bg-card: #181b22;
+      --bg-card-soft: #1d2028;
+      --border-soft: #2a2f3a;
+      --accent: #f5f5f5;
+      --accent-soft: #d1d5db;
+      --accent-strong: #ffffff;
+      --accent-brand: #000000;
+      --danger: #f97373;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #0f1115;
-      color: #ffffff;
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
+      background-color: var(--bg-main);
+      color: var(--accent);
     }
-    .wrap { max-width: 1100px; margin: auto; padding: 20px; }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 18px 24px;
+    }
+
+    /* HEADER CASA VICTOR */
+
     header {
-      display: flex; justify-content: space-between; align-items: center;
-      background: #191c24; padding: 16px; border-radius: 10px;
-      margin-bottom: 20px; border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #111217, #191c24);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      border: 1px solid #232633;
+      box-shadow: var(--shadow-soft);
     }
-    .cv-brand { display: flex; align-items: center; gap: 10px; }
-    .cv-logo img { width: 60px; height: 60px; border-radius: 50%; }
-    h1 { margin: 0 0 10px; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; }
-    .subtitulo { color: #ccc; margin-bottom: 18px; }
-    .layout { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
-    @media(max-width:900px){ .layout { grid-template-columns: 1fr; } }
-    .card { background: #181b22; padding: 16px; border-radius: 10px; border: 1px solid #333; }
-    label { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
-    input, select, button {
-      width: 100%; padding: 8px; margin-top: 6px; border-radius: 6px;
-      background: #020617; border: 1px solid #444; color: #fff;
+
+    .cv-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    button { background:#f5f5f5; color:#000; cursor:pointer; }
-    table { width:100%; border-collapse: collapse; margin-top:14px; font-size:.85rem; }
-    th,td { border-bottom:1px solid #333; padding: 8px; }
-    th { background:#111827; text-transform: uppercase; font-size:.75rem; }
-    .chip { display:inline-block; padding:4px 10px; border:1px solid #444; margin-right:6px; border-radius:20px; font-size:.7rem; }
-    .alerta { color: #ff7777; font-size:.8rem; margin-top:6px; }
+
+    .cv-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .cv-logo img {
+      max-width: 90%;
+      height: auto;
+    }
+
+    .cv-text-main {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cv-title {
+      font-size: 1.15rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+    }
+
+    .cv-subtitle {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent-soft);
+      opacity: 0.9;
+    }
+
+    .cv-tagline {
+      font-size: 0.8rem;
+      text-align: right;
+      color: var(--accent-soft);
+    }
+
+    .cv-tagline span {
+      font-weight: 600;
+      color: var(--accent-strong);
+    }
+
+    h1 {
+      font-size: 1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin: 0 0 4px;
+    }
+
+    .subtitulo {
+      color: #9ca3af;
+      margin-bottom: 16px;
+      font-size: 0.83rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #111827;
+      border: 1px solid #374151;
+      font-size: 0.7rem;
+      margin-left: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* LAYOUT */
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 2.1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .cv-tagline {
+        text-align: left;
+      }
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      margin-bottom: 12px;
+    }
+
+    .card-soft {
+      background: var(--bg-card-soft);
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-soft);
+    }
+
+    input[type="file"],
+    input[type="text"],
+    select,
+    button {
+      margin-top: 6px;
+      margin-bottom: 10px;
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      font-size: 0.9rem;
+      background: #020617;
+      color: var(--accent);
+      outline: none;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+    }
+
+    input[type="text"]:focus,
+    select:focus {
+      border-color: #6b7280;
+      box-shadow: 0 0 0 1px #6b7280;
+    }
+
+    input[type="file"] {
+      background: #020617;
+      width: 100%;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: #f5f5f5;
+      color: #000000;
+      font-weight: 600;
+      padding-inline: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.75rem;
+    }
+
+    button:hover:not(:disabled) {
+      background: #e5e7eb;
+    }
+
+    button:disabled {
+      background: #4b5563;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .info {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      line-height: 1.4;
+    }
+
+    .chip {
+      display: inline-block;
+      background: rgba(243, 244, 246, 0.03);
+      border-radius: 999px;
+      padding: 3px 11px;
+      font-size: 0.75rem;
+      margin-right: 6px;
+      margin-top: 6px;
+      border: 1px solid #374151;
+      color: #e5e7eb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.83rem;
+    }
+
+    th, td {
+      border-bottom: 1px solid #1f2933;
+      padding: 7px 6px;
+      text-align: left;
+    }
+
+    th {
+      background: #020617;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-size: 0.72rem;
+      color: #9ca3af;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(15, 23, 42, 0.6);
+    }
+
+    tr:nth-child(odd) {
+      background-color: rgba(15, 23, 42, 0.25);
+    }
+
+    .resumen {
+      margin-top: 6px;
+      font-size: 0.83rem;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    .alerta {
+      font-size: 0.8rem;
+      color: var(--danger);
+      margin-top: 6px;
+    }
+
+    .cliente-encontrado {
+      font-size: 0.8rem;
+      color: #4ade80;
+      margin-top: 4px;
+    }
+
+    h2 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    code {
+      font-size: 0.76rem;
+      background: rgba(15, 23, 42, 0.7);
+      padding: 3px 6px;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .pill-vendedor {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      background: rgba(15, 23, 42, 0.7);
+      color: #e5e7eb;
+    }
+
+    .pill-vendedor span {
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
-
-  <header>
-    <div class="cv-brand">
-      <div class="cv-logo">
-        <img src="casavictor-logo.png">
+  <div class="wrap">
+    <!-- HEADER BRANDING CASA VICTOR -->
+    <header>
+      <div class="cv-brand">
+        <div class="cv-logo">
+          <!-- Cambiá el nombre del archivo si necesitás -->
+          <img src="casavictor-logo.png" alt="Casa Victor" />
+        </div>
+        <div class="cv-text-main">
+          <div class="cv-title">Casa Victor</div>
+          <div class="cv-subtitle">Panel clientes corporativos</div>
+        </div>
       </div>
+      <div class="cv-tagline">
+        <div class="pill-vendedor">
+          Vendedor corporativo <span>Leandro</span>
+        </div>
+        <div style="margin-top:6px;">
+          <span>Accesorios · Marroquinería · Calzado</span>
+        </div>
+      </div>
+    </header>
+
+    <h1>Resumen de compras por cliente</h1>
+    <div class="subtitulo">
+      Subí el archivo CSV de ventas y buscá por nombre de cliente para ver qué productos compra,
+      con Marca, Rubro, Unidades y Volumen $.
+      <span class="badge">Fuente: Leandro clientes.csv</span>
+    </div>
+
+    <div class="layout">
+      <!-- PANEL IZQUIERDO: CONTROLES -->
       <div>
-        <div style="font-size:1.2rem; text-transform:uppercase;">Casa Victor</div>
-        <div style="font-size:.8rem; text-transform:uppercase; letter-spacing:.1em; color:#ccc;">
-          Panel clientes corporativos
+        <div class="card card-soft">
+          <label for="fileInput">1 · Cargar archivo CSV</label><br />
+          <input type="file" id="fileInput" accept=".csv" />
+          <div class="info">
+            El CSV debe estar separado por <b>;</b> y contener:<br/>
+            <code>Año; Mes; Cod. Artículo; Artículo; Marca; Rubro; Cliente; Unidades; Volumen $</code>
+          </div>
+        </div>
+
+        <div class="card card-soft">
+          <label for="clienteInput">2 · Buscar cliente</label><br />
+          <input
+            type="text"
+            id="clienteInput"
+            list="listaClientes"
+            placeholder="Ej: GUTIERREZ CALISAYA, AYELEN..."
+            disabled
+          />
+          <datalist id="listaClientes"></datalist>
+          <button id="btnBuscar" disabled>Buscar</button>
+          <div id="mensajeBusqueda" class="alerta" style="display:none;"></div>
+          <div id="clienteSeleccionadoMsg" class="cliente-encontrado" style="display:none;"></div>
+        </div>
+
+        <div class="card card-soft">
+          <label>3 · Filtros temporales</label><br />
+          <div class="info">Aplican sobre el cliente seleccionado.</div>
+          <div style="margin-top:8px;">
+            <label for="filtroAnio" style="font-weight:500;font-size:0.78rem;text-transform:none;letter-spacing:0;">
+              Año
+            </label><br/>
+            <select id="filtroAnio" disabled>
+              <option value="todos">Todos</option>
+            </select>
+          </div>
+          <div style="margin-top:8px;">
+            <label for="filtroMes" style="font-weight:500;font-size:0.78rem;text-transform:none;letter-spacing:0;">
+              Mes
+            </label><br/>
+            <select id="filtroMes" disabled>
+              <option value="todos">Todos</option>
+            </select>
+          </div>
+          <div class="info" style="margin-top:6px;">
+            Podés dejar "Todos" o combinar Año + Mes para analizar períodos puntuales.
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL DERECHO: RESULTADOS -->
+      <div>
+        <div class="card" id="detalleClienteCard" style="display:none;">
+          <h2 id="tituloCliente"></h2>
+          <div id="chipsCliente"></div>
+          <div class="resumen" id="resumenCliente"></div>
+
+          <table id="tablaArticulos">
+            <thead>
+              <tr>
+                <th>Cód. Artículo</th>
+                <th>Artículo</th>
+                <th>Marca</th>
+                <th>Rubro</th>
+                <th>Unidades</th>
+                <th>Volumen $</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
         </div>
       </div>
     </div>
-
-    <div style="text-align:right; font-size:.8rem; color:#ccc;">
-      Vendedor: <b>Leandro</b><br>
-      Accesorios · Marroquinería · Calzado
-    </div>
-  </header>
-
-  <h1>Resumen de compras por cliente</h1>
-  <div class="subtitulo">
-    Seleccioná el archivo CSV → buscá un cliente → analizá artículos, marcas, rubros, unidades y volumen $.
   </div>
 
-  <div class="layout">
-    <div>
+  <!-- LÓGICA JS -->
+  <script>
+    let ventas = [];
+    let clientesUnicos = [];
+    let aniosUnicos = [];
+    let mesesUnicos = [];
+    let clienteActual = null;
 
-      <div class="card">
-        <label>1 · Seleccionar archivo CSV</label>
-        <input type="file" id="fileInput" accept=".csv">
-        <div style="font-size:.75rem; color:#aaa; margin-top:6px;">
-          Debe ser un .CSV separado por punto y coma (;)
-        </div>
-      </div>
+    const fileInput = document.getElementById('fileInput');
+    const clienteInput = document.getElementById('clienteInput');
+    const listaClientes = document.getElementById('listaClientes');
+    const btnBuscar = document.getElementById('btnBuscar');
+    const mensajeBusqueda = document.getElementById('mensajeBusqueda');
+    const clienteSeleccionadoMsg = document.getElementById('clienteSeleccionadoMsg');
 
-      <div class="card">
-        <label>2 · Buscar cliente</label>
-        <input type="text" id="clienteInput" disabled placeholder="Ej: GUTIERREZ CALISAYA, AYELEN">
-        <datalist id="listaClientes"></datalist>
-        <button id="btnBuscar" disabled>Buscar</button>
-        <div id="mensajeBusqueda" class="alerta" style="display:none;"></div>
-      </div>
+    const filtroAnio = document.getElementById('filtroAnio');
+    const filtroMes = document.getElementById('filtroMes');
 
-      <div class="card">
-        <label>3 · Filtros temporales</label><br><br>
-        <label>Año</label>
-        <select id="filtroAnio" disabled>
-          <option value="todos">Todos</option>
-        </select>
+    const detalleClienteCard = document.getElementById('detalleClienteCard');
+    const tituloCliente = document.getElementById('tituloCliente');
+    const chipsCliente = document.getElementById('chipsCliente');
+    const resumenCliente = document.getElementById('resumenCliente');
+    const tablaArticulosBody = document.querySelector('#tablaArticulos tbody');
 
-        <label>Mes</label>
-        <select id="filtroMes" disabled>
-          <option value="todos">Todos</option>
-        </select>
-      </div>
-
-    </div>
-
-    <!-- RESULTADOS -->
-    <div>
-      <div class="card" id="detalleClienteCard" style="display:none;">
-        <h2 id="tituloCliente"></h2>
-        <div id="chipsCliente"></div>
-        <div id="resumenCliente" style="margin-top:10px;"></div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Cod.</th>
-              <th>Artículo</th>
-              <th>Marca</th>
-              <th>Rubro</th>
-              <th>Unidades</th>
-              <th>Volumen $</th>
-            </tr>
-          </thead>
-          <tbody id="tablaArticulos"></tbody>
-        </table>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<script>
-let ventas = [];
-let clientesUnicos = [];
-let clienteActual = null;
-
-const fileInput = document.getElementById("fileInput");
-const clienteInput = document.getElementById("clienteInput");
-const listaClientes = document.getElementById("listaClientes");
-const btnBuscar = document.getElementById("btnBuscar");
-const mensajeBusqueda = document.getElementById("mensajeBusqueda");
-const filtroAnio = document.getElementById("filtroAnio");
-const filtroMes = document.getElementById("filtroMes");
-
-const detalleClienteCard = document.getElementById("detalleClienteCard");
-const tituloCliente = document.getElementById("tituloCliente");
-const chipsCliente = document.getElementById("chipsCliente");
-const resumenCliente = document.getElementById("resumenCliente");
-const tablaArticulosBody = document.getElementById("tablaArticulos");
-
-fileInput.addEventListener("change", function (e) {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function (evt) {
-    procesarCSV(evt.target.result);
-  };
-  reader.readAsText(file, "UTF-8");
-});
-
-function procesarCSV(texto) {
-  const lineas = texto.trim().split(/\r?\n/);
-  if (lineas.length < 2) {
-    alert("Archivo vacío");
-    return;
-  }
-
-  const encabezados = lineas[0].split(";").map(h => normalizar(h));
-
-  // Map flexible de columnas
-  function col(...variantes) {
-    let idx = encabezados.findIndex(e => variantes.includes(e));
-    return idx;
-  }
-
-  const idxAño = col("año","anio","ano","year");
-  const idxMes = col("mes","month");
-  const idxCod = col("cod. artículo","cod articulo","codigo","código","sku");
-  const idxArt = col("artículo","articulo","descripcion","descripción","producto");
-  const idxMarca = col("marca");
-  const idxRubro = col("rubro","categoria","categoría");
-  const idxCliente = col("cliente","razon social","razón social");
-  const idxUnidades = col("unidades","cantidad","cant");
-  const idxVolumen = col("volumen $","volumen","importe","total");
-
-  if ([idxAño,idxMes,idxCod,idxArt,idxMarca,idxRubro,idxCliente,idxUnidades,idxVolumen].includes(-1)) {
-    alert("Los encabezados no coinciden con lo esperado.\n\nEncabezados detectados:\n" + encabezados.join(" | "));
-    return;
-  }
-
-  ventas = [];
-  clientesUnicos = [];
-  clienteActual = null;
-
-  for (let i=1; i<lineas.length; i++) {
-    const cols = lineas[i].split(";");
-
-    const fila = {
-      año: cols[idxAño],
-      mes: cols[idxMes],
-      cod: cols[idxCod],
-      art: cols[idxArt],
-      marca: cols[idxMarca],
-      rubro: cols[idxRubro],
-      cliente: cols[idxCliente],
-      unidades: parseFloat(cols[idxUnidades] || 0),
-      volumen: parseFloat(cols[idxVolumen] || 0)
+    const nombresMes = {
+      "1": "Enero", "2": "Febrero", "3": "Marzo", "4": "Abril",
+      "5": "Mayo", "6": "Junio", "7": "Julio", "8": "Agosto",
+      "9": "Septiembre", "10": "Octubre", "11": "Noviembre", "12": "Diciembre"
     };
 
-    ventas.push(fila);
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    if (!clientesUnicos.includes(fila.cliente)) clientesUnicos.push(fila.cliente);
-  }
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const text = evt.target.result;
+        procesarCSV(text);
+      };
+      reader.readAsText(file, 'ISO-8859-1');
+    });
 
-  cargarClientes();
-  habilitarControles();
-}
+    function procesarCSV(texto) {
+      const lineas = texto.trim().split(/\r?\n/);
+      if (lineas.length < 2) {
+        alert('El archivo no contiene datos.');
+        return;
+      }
 
-function normalizar(str) {
-  return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
-}
+      const encabezados = lineas[0].split(';').map(h => h.trim());
 
-function cargarClientes() {
-  listaClientes.innerHTML = "";
-  clientesUnicos.sort().forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c;
-    listaClientes.appendChild(opt);
-  });
-}
+      const idxAnio       = encabezados.indexOf('Año');
+      const idxMes        = encabezados.indexOf('Mes');
+      const idxCodArt     = encabezados.indexOf('Cod. Artículo');
+      const idxArticulo   = encabezados.indexOf('Artículo');
+      const idxMarca      = encabezados.indexOf('Marca');
+      const idxRubro      = encabezados.indexOf('Rubro');
+      const idxCliente    = encabezados.indexOf('Cliente');
+      const idxUnidades   = encabezados.indexOf('Unidades');
+      const idxVolumen    = encabezados.indexOf('Volumen $');
 
-function habilitarControles() {
-  clienteInput.disabled = false;
-  btnBuscar.disabled = false;
-  filtroAño.disabled = false;
-  filtroMes.disabled = false;
-}
+      if ([idxAnio, idxMes, idxCodArt, idxArticulo, idxMarca, idxRubro, idxCliente, idxUnidades, idxVolumen].some(i => i === -1)) {
+        alert('El CSV no tiene los encabezados esperados. Revisá que coincidan con: Año; Mes; Cod. Artículo; Artículo; Marca; Rubro; Cliente; Unidades; Volumen $');
+        return;
+      }
 
-btnBuscar.addEventListener("click", buscarCliente);
+      ventas = [];
+      clientesUnicos = [];
+      aniosUnicos = [];
+      mesesUnicos = [];
+      clienteActual = null;
+      detalleClienteCard.style.display = 'none';
+      mensajeBusqueda.style.display = 'none';
+      clienteSeleccionadoMsg.style.display = 'none';
+      listaClientes.innerHTML = '';
+      filtroAnio.innerHTML = '<option value="todos">Todos</option>';
+      filtroMes.innerHTML = '<option value="todos">Todos</option>';
 
-function buscarCliente() {
-  const texto = clienteInput.value.trim().toLowerCase();
-  mensajeBusqueda.style.display="none";
+      for (let i = 1; i < lineas.length; i++) {
+        const cols = lineas[i].split(';');
+        if (cols.length < encabezados.length) continue;
 
-  if (!texto) {
-    mensajeBusqueda.textContent = "Ingresá un cliente.";
-    mensajeBusqueda.style.display = "block";
-    return;
-  }
+        const anio     = (cols[idxAnio] || '').trim();
+        const mes      = (cols[idxMes] || '').trim();
+        const codArt   = (cols[idxCodArt] || '').trim();
+        const articulo = (cols[idxArticulo] || '').trim();
+        const marca    = (cols[idxMarca] || '').trim();
+        const rubro    = (cols[idxRubro] || '').trim();
+        const cliente  = (cols[idxCliente] || '').trim();
+        const unidadesStr = (cols[idxUnidades] || '').trim();
+        const volumenStr  = (cols[idxVolumen] || '').trim();
 
-  const match = clientesUnicos.find(c => c.toLowerCase() === texto)
-           || clientesUnicos.find(c => c.toLowerCase().includes(texto));
+        if (!cliente) continue;
 
-  if (!match) {
-    mensajeBusqueda.textContent = "Cliente no encontrado.";
-    mensajeBusqueda.style.display = "block";
-    return;
-  }
+        const unidadesNum = parseNumber(unidadesStr);
+        const volumenNum  = parseNumber(volumenStr);
 
-  clienteActual = match;
-  mostrarCliente();
-}
+        ventas.push({
+          anio,
+          mes,
+          codArt,
+          articulo,
+          marca,
+          rubro,
+          cliente,
+          unidades: unidadesNum,
+          volumen: volumenNum
+        });
 
-function mostrarCliente() {
-  const datos = ventas.filter(v => v.cliente === clienteActual);
+        if (!clientesUnicos.includes(cliente)) {
+          clientesUnicos.push(cliente);
+        }
+        if (anio && !aniosUnicos.includes(anio)) {
+          aniosUnicos.push(anio);
+        }
+        if (mes && !mesesUnicos.includes(mes)) {
+          mesesUnicos.push(mes);
+        }
+      }
 
-  tituloCliente.textContent = clienteActual;
-  detalleClienteCard.style.display = "block";
+      clientesUnicos.sort().forEach(c => {
+        const option = document.createElement('option');
+        option.value = c;
+        listaClientes.appendChild(option);
+      });
 
-  // resumen
-  const totalU = datos.reduce((a,b)=>a+b.unidades,0);
-  const totalV = datos.reduce((a,b)=>a+b.volumen,0);
-  resumenCliente.innerHTML =
-    `Unidades: <b>${totalU}</b><br>Volumen: <b>$ ${totalV.toLocaleString("es-AR")}</b>`;
+      aniosUnicos.sort().forEach(a => {
+        const opt = document.createElement('option');
+        opt.value = a;
+        opt.textContent = a;
+        filtroAnio.appendChild(opt);
+      });
 
-  chipsCliente.innerHTML = "";
-  const años = [...new Set(datos.map(d=>d.año))];
-  const meses = [...new Set(datos.map(d=>d.mes))];
-  chipsCliente.innerHTML =
-    `<span class="chip">Años: ${años.join(", ")}</span>
-     <span class="chip">Meses: ${meses.join(", ")}</span>`;
+      mesesUnicos.sort((a,b) => Number(a)-Number(b)).forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m;
+        const nombreMes = nombresMes[String(Number(m))] || m;
+        opt.textContent = `${nombreMes} (${m})`;
+        filtroMes.appendChild(opt);
+      });
 
-  tablaArticulosBody.innerHTML = "";
-  datos.forEach(d=>{
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${d.cod}</td>
-      <td>${d.art}</td>
-      <td>${d.marca}</td>
-      <td>${d.rubro}</td>
-      <td>${d.unidades}</td>
-      <td>$ ${d.volumen.toLocaleString("es-AR")}</td>
-    `;
-    tablaArticulosBody.appendChild(tr);
-  });
-}
-</script>
+      clienteInput.disabled = false;
+      btnBuscar.disabled = false;
+      filtroAnio.disabled = false;
+      filtroMes.disabled = false;
 
+      filtroAnio.value = 'todos';
+      filtroMes.value = 'todos';
+
+      alert('Archivo cargado correctamente. Ya podés buscar un cliente.');
+    }
+
+    btnBuscar.addEventListener('click', buscarCliente);
+    clienteInput.addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') buscarCliente();
+    });
+
+    filtroAnio.addEventListener('change', actualizarVistaCliente);
+    filtroMes.addEventListener('change', actualizarVistaCliente);
+
+    function buscarCliente() {
+      const texto = (clienteInput.value || '').trim();
+      mensajeBusqueda.style.display = 'none';
+      clienteSeleccionadoMsg.style.display = 'none';
+
+      if (!texto) {
+        mensajeBusqueda.textContent = 'Ingresá al menos parte del nombre del cliente.';
+        mensajeBusqueda.style.display = 'block';
+        return;
+      }
+
+      const textoLower = texto.toLowerCase();
+      let coincidencias = clientesUnicos.filter(c => c.toLowerCase() === textoLower);
+
+      if (coincidencias.length === 0) {
+        coincidencias = clientesUnicos.filter(c => c.toLowerCase().includes(textoLower));
+      }
+
+      if (coincidencias.length === 0) {
+        mensajeBusqueda.textContent = 'No se encontraron clientes que coincidan con la búsqueda.';
+        mensajeBusqueda.style.display = 'block';
+        detalleClienteCard.style.display = 'none';
+        return;
+      }
+
+      if (coincidencias.length > 1) {
+        mensajeBusqueda.textContent = `Se encontraron ${coincidencias.length} clientes. Mostrando el primero: ${coincidencias[0]}`;
+        mensajeBusqueda.style.display = 'block';
+      }
+
+      clienteActual = coincidencias[0];
+      clienteSeleccionadoMsg.textContent = `Cliente seleccionado: ${clienteActual}`;
+      clienteSeleccionadoMsg.style.display = 'block';
+
+      actualizarVistaCliente();
+    }
+
+    function actualizarVistaCliente() {
+      if (!clienteActual) return;
+
+      const anioSel = filtroAnio.value;
+      const mesSel = filtroMes.value;
+
+      let ventasCliente = ventas.filter(v => v.cliente === clienteActual);
+
+      if (anioSel !== 'todos') {
+        ventasCliente = ventasCliente.filter(v => v.anio === anioSel);
+      }
+      if (mesSel !== 'todos') {
+        ventasCliente = ventasCliente.filter(v => v.mes === mesSel);
+      }
+
+      if (ventasCliente.length === 0) {
+        detalleClienteCard.style.display = 'none';
+        resumenCliente.textContent = '';
+        tablaArticulosBody.innerHTML = '';
+        return;
+      }
+
+      mostrarDetalleCliente(ventasCliente);
+    }
+
+    function mostrarDetalleCliente(ventasCliente) {
+      detalleClienteCard.style.display = 'block';
+
+      tituloCliente.textContent = clienteActual;
+
+      chipsCliente.innerHTML = '';
+      const anios = [...new Set(ventasCliente.map(v => v.anio).filter(Boolean))];
+      const meses = [...new Set(ventasCliente.map(v => v.mes).filter(Boolean))];
+
+      if (anios.length) {
+        const chipAnio = document.createElement('span');
+        chipAnio.className = 'chip';
+        chipAnio.textContent = 'Años: ' + anios.sort().join(', ');
+        chipsCliente.appendChild(chipAnio);
+      }
+
+      if (meses.length) {
+        const mesesDesc = meses
+          .sort((a,b) => Number(a)-Number(b))
+          .map(m => nombresMes[String(Number(m))] || m);
+        const chipMes = document.createElement('span');
+        chipMes.className = 'chip';
+        chipMes.textContent = 'Meses: ' + mesesDesc.join(', ');
+        chipsCliente.appendChild(chipMes);
+      }
+
+      const totalLineas    = ventasCliente.length;
+      const totalUnidades  = ventasCliente.reduce((acc, v) => acc + (v.unidades || 0), 0);
+      const totalVolumen   = ventasCliente.reduce((acc, v) => acc + (v.volumen || 0), 0);
+
+      resumenCliente.innerHTML =
+        `Líneas de venta en el período: <b>${totalLineas}</b><br>` +
+        `Unidades totales: <b>${formatearNumero(totalUnidades)}</b><br>` +
+        `Volumen total: <b>$ ${formatearNumero(totalVolumen)}</b>`;
+
+      const mapa = {};
+      ventasCliente.forEach(v => {
+        const clave = `${v.codArt}||${v.articulo}||${v.marca}||${v.rubro}`;
+        if (!mapa[clave]) {
+          mapa[clave] = {
+            codArt: v.codArt,
+            articulo: v.articulo,
+            marca: v.marca,
+            rubro: v.rubro,
+            unidades: 0,
+            volumen: 0
+          };
+        }
+        mapa[clave].unidades += (v.unidades || 0);
+        mapa[clave].volumen  += (v.volumen || 0);
+      });
+
+      const filas = Object.values(mapa).sort((a,b) => b.volumen - a.volumen);
+
+      tablaArticulosBody.innerHTML = '';
+      filas.forEach(f => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${f.codArt}</td>
+          <td>${f.articulo}</td>
+          <td>${f.marca}</td>
+          <td>${f.rubro}</td>
+          <td>${formatearNumero(f.unidades)}</td>
+          <td>$ ${formatearNumero(f.volumen)}</td>
+        `;
+        tablaArticulosBody.appendChild(tr);
+      });
+    }
+
+    function parseNumber(str) {
+      if (!str) return 0;
+      let limpio = str.toString().replace(/[^0-9,.-]/g, '');
+      limpio = limpio.replace(/\./g, '');
+      limpio = limpio.replace(',', '.');
+      const n = parseFloat(limpio);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function formatearNumero(n) {
+      return Number(n).toLocaleString('es-AR', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      });
+    }
+  </script>
 </body>
 </html>
