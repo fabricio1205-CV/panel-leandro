@@ -36,8 +36,6 @@
       padding: 16px 18px 24px;
     }
 
-    /* HEADER CASA VICTOR */
-
     header {
       display: flex;
       align-items: center;
@@ -129,8 +127,6 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
-
-    /* LAYOUT */
 
     .layout {
       display: grid;
@@ -325,7 +321,6 @@
 </head>
 <body>
   <div class="wrap">
-    <!-- HEADER BRANDING CASA VICTOR -->
     <header>
       <div class="cv-brand">
         <div class="cv-logo">
@@ -354,7 +349,6 @@
     </div>
 
     <div class="layout">
-      <!-- PANEL IZQUIERDO: CONTROLES -->
       <div>
         <div class="card card-soft">
           <label>1 · Fuente de datos</label><br />
@@ -404,7 +398,6 @@
         </div>
       </div>
 
-      <!-- PANEL DERECHO: RESULTADOS -->
       <div>
         <div class="card" id="detalleClienteCard" style="display:none;">
           <h2 id="tituloCliente"></h2>
@@ -429,7 +422,6 @@
     </div>
   </div>
 
-  <!-- LÓGICA JS -->
   <script>
     let ventas = [];
     let clientesUnicos = [];
@@ -458,6 +450,28 @@
       "9": "Septiembre", "10": "Octubre", "11": "Noviembre", "12": "Diciembre"
     };
 
+    // Normaliza texto (minúsculas, sin tildes)
+    function normalizarTexto(str) {
+      return str
+        .toString()
+        .trim()
+        .replace('\uFEFF', '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+    }
+
+    // Busca índice de columna por posibles nombres
+    function findIndex(encabezados, posiblesNombres) {
+      const normHeaders = encabezados.map(h => normalizarTexto(h));
+      for (const nombre of posiblesNombres) {
+        const objetivo = normalizarTexto(nombre);
+        const idx = normHeaders.indexOf(objetivo);
+        if (idx !== -1) return idx;
+      }
+      return -1;
+    }
+
     function procesarCSV(texto) {
       const lineas = texto.trim().split(/\r?\n/);
       if (lineas.length < 2) {
@@ -465,23 +479,29 @@
         return;
       }
 
-      // FIX BOM + trim de encabezados
       const encabezados = lineas[0]
         .split(';')
         .map(h => h.replace('\uFEFF', '').trim());
 
-      const idxAnio       = encabezados.indexOf('Año');
-      const idxMes        = encabezados.indexOf('Mes');
-      const idxCodArt     = encabezados.indexOf('Cod. Artículo');
-      const idxArticulo   = encabezados.indexOf('Artículo');
-      const idxMarca      = encabezados.indexOf('Marca');
-      const idxRubro      = encabezados.indexOf('Rubro');
-      const idxCliente    = encabezados.indexOf('Cliente');
-      const idxUnidades   = encabezados.indexOf('Unidades');
-      const idxVolumen    = encabezados.indexOf('Volumen $');
+      const idxAnio     = findIndex(encabezados, ['Año', 'Ano', 'Anio']);
+      const idxMes      = findIndex(encabezados, ['Mes']);
+      const idxCodArt   = findIndex(encabezados, ['Cod. Artículo', 'Cod. Articulo', 'Codigo Artículo', 'Codigo Articulo']);
+      const idxArticulo = findIndex(encabezados, ['Artículo', 'Articulo', 'Descripcion', 'Descripción']);
+      const idxMarca    = findIndex(encabezados, ['Marca']);
+      const idxRubro    = findIndex(encabezados, ['Rubro', 'Categoria', 'Categoría']);
+      const idxCliente  = findIndex(encabezados, ['Cliente', 'Razon Social', 'Razón Social']);
+      const idxUnidades = findIndex(encabezados, ['Unidades', 'Cantidad', 'Cant']);
+      const idxVolumen  = findIndex(encabezados, ['Volumen $', 'Volumen', 'Importe', 'Total']);
 
-      if ([idxAnio, idxMes, idxCodArt, idxArticulo, idxMarca, idxRubro, idxCliente, idxUnidades, idxVolumen].some(i => i === -1)) {
-        alert('El CSV no tiene los encabezados esperados. Revisá que coincidan con: Año; Mes; Cod. Artículo; Artículo; Marca; Rubro; Cliente; Unidades; Volumen $');
+      const indices = [idxAnio, idxMes, idxCodArt, idxArticulo, idxMarca, idxRubro, idxCliente, idxUnidades, idxVolumen];
+      if (indices.some(i => i === -1)) {
+        alert(
+          'El CSV no tiene los encabezados esperados.\n' +
+          'Encabezados detectados: \n' +
+          encabezados.join(' | ') + '\n\n' +
+          'Revisá que existan columnas equivalentes a:\n' +
+          'Año, Mes, Cod. Artículo, Artículo, Marca, Rubro, Cliente, Unidades, Volumen $.'
+        );
         return;
       }
 
@@ -725,7 +745,6 @@
       });
     }
 
-    // === CARGA AUTOMÁTICA DEL CSV DESDE GITHUB PAGES ===
     document.addEventListener('DOMContentLoaded', function() {
       fetch('Leandro clientes.csv')
         .then(resp => {
